@@ -1,5 +1,15 @@
-print("Hello world")
-print('Good bye World') # from MoBakr99
-print("welcome")
+import os
+import sys
 
-print('Second Commit of MoBakr')
+def start_screen_session():
+    session_name = "my_python_session"
+    command = f"screen -dmS {session_name} python3 {os.path.abspath(__file__)}"
+    os.system(command)
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "child":
+        # Your main script logic here
+        print("Executing Python code in screen session...")
+        # Add your code here
+    else:
+        start_screen_session()
