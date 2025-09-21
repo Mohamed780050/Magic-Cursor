@@ -1,9 +1,10 @@
 import cv2
 import math
+import pyautogui
 import HandTrackingModule as htm  # Assuming this is a custom module for hand tracking
 
 # Webcam dimensions
-wCam, hCam = 640, 480
+wCam, hCam = 1280, 720
 
 # Initialize webcam
 cap = cv2.VideoCapture(0)
@@ -46,12 +47,19 @@ while True :
         # Calculate the length between the middle and index finger
         length2 = math.hypot(x3 - x1, y3 - y1)
 
-        # Visual cue when thump and index fingers are closed
-        if length1 < 50:
+        pyautogui.moveTo(x1, x2)
+
+        if length1 < 50 and length2 < 50:
             cv2.circle(img, (cx1, cy1), 15, (0, 255, 0), cv2.FILLED)
+            pyautogui.doubleClick()
+        # Visual cue when thump and index fingers are closed
+        elif length1 < 50:
+            cv2.circle(img, (cx1, cy1), 15, (0, 255, 0), cv2.FILLED)
+            pyautogui.leftClick()
         # Visual cue when thump and middle fingers are closed
-        if length2 < 50:
+        elif length2 < 50:
             cv2.circle(img, (cx2, cy2), 15, (0, 255, 0), cv2.FILLED)
+            pyautogui.rightClick()
 
     # Show webcam feed
     cv2.imshow("Img", img)
