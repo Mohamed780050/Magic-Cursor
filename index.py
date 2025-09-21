@@ -10,6 +10,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "child":
         # Your main script logic here
         print("Executing Python code in screen session...")
+        input("Hello")
         # Add your code here
     else:
         start_screen_session()
